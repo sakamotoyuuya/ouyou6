@@ -8,8 +8,13 @@ class BookCommentsController < ApplicationController
   end
 
   def destroy
-    comment = BookComment.find(params[:id])
-    comment.destroy
+    book_comment = BookComment.find_by(id: params[:id], book_id: params[:book_id])
+    if book_comment
+      book_comment.destroy
+    else
+      flash[:alert] = "コメントが見つかりません"
+    end
+    redirect_to request.referer
   end
 
   private
