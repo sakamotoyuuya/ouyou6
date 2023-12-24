@@ -4,7 +4,6 @@ class BookCommentsController < ApplicationController
     comment = current_user.book_comments.new(book_comment_params)
     comment.book_id = book.id
     comment.save
-    redirect_to request.referer
   end
 
   def destroy
@@ -14,7 +13,6 @@ class BookCommentsController < ApplicationController
     else
       flash[:alert] = "コメントが見つかりません"
     end
-    redirect_to request.referer
   end
 
   private
